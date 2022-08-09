@@ -1,0 +1,693 @@
+%% abtex2-modelo-trabalho-academico.tex, v-1.9.7 laurocesar
+%% Copyright 2012-2019 by abnTeX2 group at http://www.abntex.net.br/ 
+%%
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.3
+%% of this license or (at your option) any later version.
+%% The latest version of this license is in
+%%   http://www.latex-project.org/lppl.txt
+%% and version 1.3 or later is part of all distributions of LaTeX
+%% version 2005/12/01 or later.
+%%
+%% This work has the LPPL maintenance status `maintained'.
+%% 
+%% The Current Maintainer of this work is the abnTeX2 team, led
+%% by Lauro César Araujo. Further information are available on 
+%% http://www.abntex.net.br/
+%%
+%% This work consists of the files abntex2-modelo-trabalho-academico.tex,
+%% abntex2-modelo-include-comandos and abntex2-modelo-references.bib
+%%
+
+% ------------------------------------------------------------------------
+% ------------------------------------------------------------------------
+% abnTeX2: Modelo de Trabalho Academico (tese de doutorado, dissertacao de
+% mestrado e trabalhos monograficos em geral) em conformidade com 
+% ABNT NBR 14724:2011: Informacao e documentacao - Trabalhos academicos -
+% Apresentacao
+% ------------------------------------------------------------------------
+% ------------------------------------------------------------------------
+
+\documentclass[
+	% -- opções da classe memoir --
+	12pt,				% tamanho da fonte
+	openright,			% capítulos começam em pág ímpar (insere página vazia caso preciso)
+	twoside,			% para impressão em recto e verso. Oposto a oneside
+	a4paper,			% tamanho do papel. 
+	% -- opções da classe abntex2 --
+	%chapter=TITLE,		% títulos de capítulos convertidos em letras maiúsculas
+	%section=TITLE,		% títulos de seções convertidos em letras maiúsculas
+	%subsection=TITLE,	% títulos de subseções convertidos em letras maiúsculas
+	%subsubsection=TITLE,% títulos de subsubseções convertidos em letras maiúsculas
+	% -- opções do pacote babel --
+	english,			% idioma adicional para hifenização
+	french,				% idioma adicional para hifenização
+	spanish,			% idioma adicional para hifenização
+	brazil				% o último idioma é o principal do documento
+	]{abntex2}
+
+% ---
+% Pacotes básicos 
+% ---
+\usepackage{lmodern}			% Usa a fonte Latin Modern			
+\usepackage[T1]{fontenc}		% Selecao de codigos de fonte.
+\usepackage[utf8]{inputenc}		% Codificacao do documento (conversão automática dos acentos)
+\usepackage{indentfirst}		% Indenta o primeiro parágrafo de cada seção.
+\usepackage{color}				% Controle das cores
+\usepackage{graphicx}			% Inclusão de gráficos
+\usepackage{microtype} 			% para melhorias de justificação
+ \usepackage{pdfpages}          % Incluir os pdfs necessários
+% ---
+		
+% ---
+% Pacotes adicionais, usados apenas no âmbito do Modelo Canônico do abnteX2
+% ---
+%\usepackage{lipsum}				% para geração de dummy text
+\usepackage{pdflscape}
+\usepackage{multirow}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{mathtools}
+\usepackage{fixltx2e}
+%\usepackage[super,sort&compress,comma]{natbib} 
+\usepackage{setspace}
+%\usepackage{geometry}
+\usepackage{nicefrac}
+\usepackage{notoccite}
+\usepackage[section]{placeins}
+
+
+% ---
+%\renewcommand{\cleardoublepage}{\newpage}
+\newcommand\mat[1]{\mathcal{#1}}
+\graphicspath{{images/}}
+
+% ---
+% Pacotes de citações
+% ---
+\usepackage[brazilian,hyperpageref]{backref}	 % Paginas com as citações na bibl
+\usepackage[num,abnt-etal-text=emph, abnt-emphasize=bf]{abntex2cite}	% Citações padrão ABNT
+\citebrackets[] % use [REF]
+%\usepackage[alf]{abntex2cite}	% Citações padrão ABNT
+
+% --- 
+% CONFIGURAÇÕES DE PACOTES
+% --- 
+
+% ---
+% Configurações do pacote backref
+% Usado sem a opção hyperpageref de backref
+\renewcommand{\backrefpagesname}{Citado na(s) página(s):~}
+% Texto padrão antes do número das páginas
+\renewcommand{\backref}{}
+% Define os textos da citação
+\renewcommand*{\backrefalt}[4]{
+	\ifcase #1 %
+		Nenhuma citação no texto.%
+	\or
+		Citado na página #2.%
+	\else
+		Citado #1 vezes nas páginas #2.%
+	\fi}%
+% ---
+
+% ---
+% Informações de dados para CAPA e FOLHA DE ROSTO
+% ---
+\titulo{Validação do campo de força 2016H66 para a simulação de dendrímeros PAMAM e PPI. Um estudo sistemático dos efeitos da geração e do pH}
+\autor{Mayk Caldas Ramos}
+\local{Brasil}
+\data{Fevereiro/2019}
+\orientador{Bruno Araujo Cautiero Horta}
+\coorientador{}
+\instituicao{%
+  Universidade Federal do Rio de Janeiro -- UFRJ
+  \par
+  Instituto de Química
+  \par
+  Programa de Pós-Graduação em Química}
+\tipotrabalho{Dissertação de Mestrado}
+% O preambulo deve conter o tipo do trabalho, o objetivo, 
+% o nome da instituição e a área de concentração 
+\preambulo{Dissertação apresentada ao Programa de Pós-Graduação em Química, PGQU, da Universidade Federal Do Rio de Janeiro, como parte dos requisitos necessários à obtenção do título de Mestre em Ciências (Química).}
+% ---
+
+
+% ---
+% Configurações de aparência do PDF final
+
+% alterando o aspecto da cor azul
+\definecolor{blue}{RGB}{41,5,195}
+
+% informações do PDF
+\makeatletter
+\hypersetup{
+     	%pagebackref=true,
+		pdftitle={\@title}, 
+		pdfauthor={\@author},
+    	pdfsubject={\imprimirpreambulo},
+	    pdfcreator={Mayk Caldas Ramos},
+		pdfkeywords={Dendrímeros}{PAMAM}{PPI}{Dinâmica Molecular}{}, 
+		colorlinks=true,       		% false: boxed links; true: colored links
+    	linkcolor=blue,          	% color of internal links
+    	citecolor=blue,        		% color of links to bibliography
+    	filecolor=magenta,      		% color of file links
+		urlcolor=blue,
+		bookmarksdepth=4
+}
+\makeatother
+% --- 
+
+% --- 
+% Espaçamentos entre linhas e parágrafos 
+% --- 
+
+% O tamanho do parágrafo é dado por:
+\setlength{\parindent}{1.3cm}
+
+% Controle do espaçamento entre um parágrafo e outro:
+\setlength{\parskip}{0.2cm}  % tente também \onelineskip
+
+% ---
+% compila o indice
+% ---
+\makeindex
+% ---
+
+% ----
+% Início do documento
+% ----
+
+%%% -----
+%%% Formato de cabeçalho/rodapé romano nos elementos pré-textuais
+%%% -----
+
+%% Novo estilo
+\makepagestyle{estilo_pretextual} %%% escolha um nome
+  \makeevenhead{estilo_pretextual}{}{}{\ABNTEXfontereduzida \textbf \thepage}
+  \makeoddhead{estilo_pretextual}{}{}{\ABNTEXfontereduzida \textbf \thepage}
+
+%% Customiza comando \pretextual
+\renewcommand{\pretextual}{
+  \pagenumbering{roman} %%% ou \pagenumbering{Roman}
+  \aliaspagestyle{chapter}{estilo_pretextual}% customizing chapter pagestyle
+  \pagestyle{estilo_pretextual}
+  \aliaspagestyle{cleared}{empty}
+  \aliaspagestyle{part}{estilo_pretextual}
+}
+
+% ---
+% Ajusta a marca \textual para que a numeração volte a ser arábica
+% nos elementos textuais
+\let\oldtextual\textual        % copia o comando \textual anterior para \oldtextual
+\renewcommand{\textual}{%
+  \oldtextual%
+  \pagenumbering{arabic} % volta à numeração arábica
+}
+% ---
+
+\begin{document}
+
+% Seleciona o idioma do documento (conforme pacotes do babel)
+%\selectlanguage{english}
+\selectlanguage{brazil}
+
+% Retira espaço extra obsoleto entre as frases.
+\frenchspacing 
+
+% ----------------------------------------------------------
+% ELEMENTOS PRÉ-TEXTUAIS
+% ----------------------------------------------------------
+% \pretextual
+
+% ---
+% Capa
+% ---
+%\imprimircapa
+
+% ---
+% Capa
+% ---
+  \begin{capa}
+  
+   \thispagestyle{plain}
+ 
+   
+   \begin{center}
+      
+  \imprimirinstituicao
+  
+  \end{center}
+  
+  \vspace*{\fill}
+  
+  \begin{center}
+  
+  \Large\imprimirtitulo
+  
+  \end{center}
+  
+  \vspace*{\fill}
+  
+  \begin{center}
+  
+  \imprimirautor
+  
+  \end{center}
+  
+  \vspace*{\fill}
+  
+  \begin{center}
+  
+  \imprimirlocal
+  
+  \end{center}
+  
+   \begin{center}
+  
+  \imprimirdata
+  
+  \end{center}
+
+  \end{capa}
+
+
+% ---
+
+% ---
+% Folha de rosto
+% (o * indica que haverá a ficha bibliográfica)
+% ---
+\imprimirfolhaderosto*
+% ---
+
+% ---
+% Inserir a ficha bibliografica
+% ---
+
+% Isto é um exemplo de Ficha Catalográfica, ou ``Dados internacionais de
+% catalogação-na-publicação''. Você pode utilizar este modelo como referência. 
+% Porém, provavelmente a biblioteca da sua universidade lhe fornecerá um PDF
+% com a ficha catalográfica definitiva após a defesa do trabalho. Quando estiver
+% com o documento, salve-o como PDF no diretório do seu projeto e substitua todo
+% o conteúdo de implementação deste arquivo pelo comando abaixo:
+%
+ \begin{fichacatalografica}
+     \includepdf{fichaCatalog.pdf}
+ \end{fichacatalografica}
+
+% \begin{fichacatalografica}
+% 	\sffamily
+% 	\vspace*{\fill}					% Posição vertical
+% 	\begin{center}					% Minipage Centralizado
+% 	\fbox{\begin{minipage}[c][8cm]{13.5cm}		% Largura
+% 	\small
+% 	\imprimirautor
+% 	%Sobrenome, Nome do autor
+	
+% 	\hspace{0.5cm} \imprimirtitulo  / \imprimirautor. --
+% 	\imprimirlocal, \imprimirdata-
+	
+% 	\hspace{0.5cm} \thelastpage p. : il. (algumas color.) ; 30 cm.\\
+	
+% 	\hspace{0.5cm} \imprimirorientadorRotulo~\imprimirorientador\\
+	
+% 	\hspace{0.5cm}
+% 	\parbox[t]{\textwidth}{\imprimirtipotrabalho~--~\imprimirinstituicao,
+% 	\imprimirdata.}\\
+	
+% 	\hspace{0.5cm}
+% 		1. Dendrímeros.
+% 		2. PAMAM.
+% 		3. PPI.
+% 		4. Dinâmica Molecular.
+% 		I. Bruno Araújo Cautiero Horta.
+% 		II. Universidade Federal do Rio de Janeiro.
+% 		III. Programa de Pós-Graduação em Química.
+% 		IV. Título 			
+% 	\end{minipage}}
+% 	\end{center}
+%\end{fichacatalografica}
+% ---
+
+% ---
+% Inserir errata
+% ---
+%\begin{errata}
+%Elemento opcional da \citeonline[4.2.1.2]{NBR14724:2011}. Exemplo:
+%
+%\vspace{\onelineskip}
+%
+%FERRIGNO, C. R. A. \textbf{Tratamento de neoplasias ósseas apendiculares com
+%reimplantação de enxerto ósseo autólogo autoclavado associado ao plasma
+%rico em plaquetas}: estudo crítico na cirurgia de preservação de membro em
+%cães. 2011. 128 f. Tese (Livre-Docência) - Faculdade de Medicina Veterinária e
+%Zootecnia, Universidade de São Paulo, São Paulo, 2011.
+%
+%\begin{table}[htb]
+%\center
+%\footnotesize
+%\begin{tabular}{|p{1.4cm}|p{1cm}|p{3cm}|p{3cm}|}
+%  \hline
+%   \textbf{Folha} & \textbf{Linha}  & \textbf{Onde se lê}  & \textbf{Leia-se}  \\
+%    \hline
+%    1 & 10 & auto-conclavo & autoconclavo\\
+%   \hline
+%\end{tabular}
+%\end{table}
+%
+%\end{errata}
+% ---
+
+% ---
+% Inserir folha de aprovação
+% ---
+
+% Isto é um exemplo de Folha de aprovação, elemento obrigatório da NBR
+% 14724/2011 (seção 4.2.1.3). Você pode utilizar este modelo até a aprovação
+% do trabalho. Após isso, substitua todo o conteúdo deste arquivo por uma
+% imagem da página assinada pela banca com o comando abaixo:
+%
+\begin{folhadeaprovacao}
+\includepdf{fichaAprov.pdf}
+\end{folhadeaprovacao}
+%
+% \begin{folhadeaprovacao}
+
+%   \begin{center}
+%     {\ABNTEXchapterfont\large\imprimirautor}
+
+%     \vspace*{\fill}\vspace*{\fill}
+%     \begin{center}
+%       \ABNTEXchapterfont\bfseries\Large\imprimirtitulo
+%     \end{center}
+%     \vspace*{\fill}
+    
+%     \hspace{.45\textwidth}
+%     \begin{minipage}{.5\textwidth}
+%         \imprimirpreambulo
+%     \end{minipage}%
+%     \vspace*{\fill}
+%   \end{center}
+        
+%   Trabalho aprovado. \imprimirlocal, 13 de fevereiro de 2019:
+
+%   \assinatura{\textbf{\imprimirorientador} \\ DQO/IQ-UFRJ \\ Orientador} 
+%   \assinatura{\textbf{Pierre Mothé Estever, D. Sc} \\ DQO/IQ-UFRJ}
+%   %\assinatura{\textbf{Thiago Messias Cardozo, D. Sc} \\ DFQ/IQ-UFRJ}
+%   \assinatura{\textbf{Laurent Emmanuel Dardenne, D. Sc} \\ LNCC}
+%   %\assinatura{\textbf{Ernesto Raúl Caffarena, D. Sc} \\ Fiocruz}
+
+%   \begin{center}
+%     \vspace*{0.5cm}
+%     {\large\imprimirlocal}
+%     \par
+%     {\large\imprimirdata}
+%     \vspace*{1cm}
+%   \end{center}
+  
+% \end{folhadeaprovacao}
+% ---
+
+% ---
+% Dedicatória
+% ---
+\begin{dedicatoria}
+   \vspace*{\fill}
+   \centering
+   \noindent
+   \textit{ À todos que, de alguma forma, tornaram esse trabalho possível. } \vspace*{\fill}
+\end{dedicatoria}
+% ---
+
+% ---
+% Agradecimentos
+% ---
+\begin{agradecimentos}
+
+Primeiramente, gostaria de agradecer à minha família pelo suporte até aqui. Pela força em aceitar que eu seguiria por mais tempo na minha carreira acadêmica e não partir por um caminho empresarial, pelo apoio quando não fui à reuniões de família pela necessidade de estudar e por eventuais suportes financeiros quando necessário. Muito Obrigado!
+
+Aos poucos amigos que trouxe desde a juventude e que, quando a quântica e a estatística não fizeram mais sentido, sempre estiveram aqui pra uma conversa e uma cerveja. Seguimos juntos mesmo eu estando sumido.
+
+Ao meu orientador, por entender as vezes que eu sumia do laboratório por preguiça de sair nesse calor e querer trabalhar de casa, por me chamar de volta pro lab pra que eu interagisse com o grupo, pelas mensagens motivadoras, pelo crescimento pessoal além do científico e por tudo mais até aqui. Valeu!
+
+Aos colegas do laboratório LabMMol, ciência é feita de pessoas e discussões, mesmo que pareçam absurdas à uma primeira visão. Espero ainda encontrar vocês por aí.
+
+Ao grupo que passei de penetra à quase membro. Desculpe qualquer piada desnecessária e obrigado pelas discussões. Cthulhu Fhtagn.
+
+Ao grupo de quarta, que ainda não foi decidido se é um grupo quatro estrelas ou de quarta categoria, mas as conversas, risadas, discussões e brincadeiras foram de vital importância para a realização de um ócio criativo bem feito. Um brinde!
+
+A todos os professores da UFRJ com os quais interagi, obrigado pelas noites de sono não dormidas, seja por uma prova na semana seguinte ou por virar a noite estudando uma curiosidade pessoal causada por vocês.
+
+Agradeço, também, ao Lobo Carneiro (Loboc) e ao Núcleo de Atendimento a Computação de Alto Desempenho (Nacad) pela capacidade de computação sem a qual esse estudo não seria terminado e à Capes e à Faperj pela bolsa de mestrado e o financiamento do projeto, respectivamente, sem os quais esse estudo também não seria possível.
+
+Abraço!
+
+
+\end{agradecimentos}
+% ---
+
+% ---
+% Epígrafe
+% ---
+\begin{epigrafe}
+    \vspace*{\fill}
+	\begin{flushright}
+		\textit{``Study hard what interests you the most in the most undisciplined,\\
+		irreverent and original manner possible.''}\\
+		(Richard P. Feynmann)
+		
+		%\textit{``Science has not yet taught us if madness is or is not the sublimity of the intelligence.''}\\
+        %(Edgar Allan Poe)
+        
+        \textit{``The oldest and strongest emotion of mankind is fear, \\
+        and the oldest and strongest kind of fear is fear of the unknown.''}\\
+        (H. P. Lovecraft)
+        
+        %\textit{``When asked, `How do you write?' I invariably answer, `one word at a time.' ''}\\
+        %(Stephen King)
+        
+        \textit{``All we are is dust in the wind''}\\
+        (Kansas)
+        
+        %\textit{``I find it hard to tell you 'cause I find it hard to take. When people run in circles it's a very, very mad world.''}\\
+        %(Tears for Fears)
+        
+	\end{flushright}
+\end{epigrafe}
+% ---
+
+% ---
+% RESUMOS
+% ---
+
+% resumo em português
+\setlength{\absparsep}{18pt} % ajusta o espaçamento dos parágrafos do resumo
+\begin{resumo}
+Dendrímeros são macromoléculas sintéticas cuja estrutura é baseada em blocos de construção bem definidos que são repetidos de maneira sistemática.
+Em sua síntese, um bloco nuclear é considerado e, a partir dele, blocos intermediários são conectados.
+A cada camada radial de blocos intermediários utilizados, dizemos que sua geração aumentou em uma unidade.
+Portanto, a geração é utilizada para referenciar o tamanho do dendrímero.
+Ao se alcançar o tamanho desejado, uma camada de blocos terminais é adicionada.
+Por ser uma molécula sintética, sua versatilidade em aplicações de interesse só se limita pela criatividade do pesquisador.
+A estrutura tridimensional do dendrímero confere a ele a possibilidade de criar diferentes ambientes químicos em seu interior e em sua superfície.
+Essa propriedade é de especial interesse em sua utilização em diversas áreas tecnológicas como carreamento de fármacos, processos de purificação, catálise, sensores, \textit{light-harvesting}, entre outros.
+Dessa forma, é de extrema importância o estudo estrutural e dinâmico dessas macromoléculas a fim de melhor entender esses sistemas e desenhar novas estruturas com potencial tecnológico.
+Como métodos de análise experimentais têm suas limitações na descrição microscópica do sistema, se mostra de grande valia a utilização de métodos teóricos e computacionais para, em conjunto com resultados experimentais, nos fornecer um entendimento completo do comportamento desses sistemas e, consequentemente, a capacidade de melhorar o seu desempenho numa aplicação específica.
+Dentre os métodos computacionais disponíveis, a dinâmica molecular é bastante utilizada para o estudo de sistemas nessa escala de tamanho.
+Nesse método, um campo de força é necessário para o cálculo das interações entre as partículas.
+O campo de força GROMOS-compatible 2016H66 é bastante promissor devido à sua parametrização para a reprodução de propriedades termodinâmicas de compostos orgânicos em fase condensada.
+Muitos dos grupos funcionais utilizados no conjunto de parametrização do 2016H66 estão presentes nos blocos de construção dos dendrímeros.
+Esse trabalho tem como foco a validação do 2016H66 para a simulação de dendrímeros utilizando o poli(amido amina) (PAMAM) e o poli(propileno imina) (PPI) como representantes devido à maior quantidade de dados disponíveis na literatura para essas moléculas.
+Para validação, as propriedades de raio de giro, fator de forma e funções de distribuição radial foram calculadas e comparadas com trabalhos experimentais e computacionais disponíveis.
+No geral, o 2016H66 mostrou uma compatibilidade com os resultados computacionais relatados e  em alguns casos uma melhor adequação com os resultados experimentais de SAXS e de SANS.   
+
+ \textbf{Palavras-chave}: Dendrímeros. PAMAM. PPI. Dinâmica molecular.
+\end{resumo}
+
+% resumo em inglês
+\begin{resumo}[Abstract]
+ \begin{otherlanguage*}{english}
+Dendrimers are synthetic macromolecules whose structure is based on building blocks well defined that are replied in a systematic manner.
+In its synthesis, intermediary blocks (or monomers) are connected to a core block.
+Each radial shell of monomers added, we say that the generation of the dendrimer grew up by an unity.
+Therefore, the generation is used to reference the dendrimer size.
+When the desired size is reached, a terminal block shell is added up.
+As it is a synthetic molecule, its versatility to desired applications is limited only by the researcher creativity.
+The three-dimensional structure of the dendrimer gives it the possiblity of making distinct chemical environments in its interior and on its surface.
+This is a interesting property in various applications in several technological fields such as drug delivering, purification processes, catalysis, light-harvesting, among others.
+This way, the dynamical and structural study of its macromolecules are extremely important to provide our better understanding of those systems and draw new structures with technological potential.
+As experimental analysis methods have their limitations in the microscopic description of the system, the use of theoretical and computational approaches, together with experimental results, is desired to provide a complete understanding of the behaviour of these systems and, consequently, the capacity of improve its performance in a specific application.
+Among the available computational methods, the molecular dynamics is widely used for the study of systems in this size scale.
+In this method, a force field is necessary to the calculation of the interactions between particles.
+The GROMOS-compatible 2016H66 force field is very promising due to its parameterization focused in the reproduction of thermodynamic properties of organic compounds in the condensed phase.
+Various of the functional groups used in the parameterization of the 2016H66 are in the build blocks of dendrimers.
+This work is focused in the validation of the 2016H66 to the simulation of the dendrimers using the Poly(amido amine) (PAMAM) and the Poly(propilene imine) (PPI) as representatives due to the bigger amount of reported data in the literature to these molecules.
+To the validation, the radius of gyration, form factor and radial distribution functions were calculated and compared to available experimental and computational studies. In general, the 2016H66 revealed a compatibility to the reported computational results and, in some cases, a better adequation to the SAXS and SANS experimental results.
+
+   \vspace{\onelineskip}
+ 
+   \noindent 
+   \textbf{Keywords}: Dendrimers. PAMAM. PPI. Molecular Dynamics.
+ \end{otherlanguage*}
+\end{resumo}
+
+% ---
+% inserir lista de ilustrações
+% ---
+\pdfbookmark[0]{\listfigurename}{lof}
+\listoffigures*
+\cleardoublepage
+% ---
+
+% ---
+% inserir lista de tabelas
+% ---
+\pdfbookmark[0]{\listtablename}{lot}
+\listoftables*
+\cleardoublepage
+% ---
+
+% ---
+% inserir lista de abreviaturas e siglas
+% ---
+\begin{siglas}
+  \item[PAMAM] Poli(amido amina)
+  \item[PPI] Poli(propileno imina)
+  \item[EDA] Etileno diamina
+  \item[DAB] 1,4-diamino butano
+  \item[PEG] Poli(etileno glicol)
+  \item[PEO] Poli(óxido de etileno)
+  \item[SANS] Espalhamento de neutros a baixos ângulos
+  \item[SAXS] Espalhamento de raio-X a baixos ângulos
+  \item[DDS] Sistemas de entrega de fármacos
+  \item[HBP] Polímeros altamente ramificados
+  \item[FF] Campo de força
+  \item[LJ] Lennard-Jones
+  \item[RDF] Função de distribuição radial
+  \item[PME] Particle-Mesh Ewald
+  \item[AFM] Microscopia de força atômica
+  \item[TEM] Microscopia de transmissão eletrônica
+\end{siglas}
+% ---
+
+% ---
+% inserir lista de símbolos
+% ---
+\begin{simbolos}
+  \item[$k_b$] Constante de força do estiramento de ligação 
+  \item[$k_a$] Constante de força da deformação angular
+  \item[$V_t$] Constante de força da torção de diedro próprio
+  \item[$V_i$] Constante de força da torção de diedro impróprio
+  \item[$r_{b,eq}$] Distância de ligação de referência
+  \item[$\theta_{a,eq}$] Ângulo de deformação angular de referência
+  \item[$n$] Multiplicidade do potencial de diedro próprio
+  \item[$\gamma$] Fase do potencial de diedro próprio
+  \item[$\xi_{i,eq}$] Ângulo de diedro impróprio de referência
+  \item[$\epsilon_{ij}$] Parâmetro de LJ referente à profundidade do poço de potencial
+  \item[$\sigma_{ij}$] Parâmetro de LJ referente à distância finita de potencial nulo
+  \item[$q_i$] Carga efetiva do átomo $i$
+  \item[$r_b$] Distância de ligação
+  \item[$\theta_a$] Ângulo de deformação angular
+  \item[$\omega_d$] Ângulo de Diedro próprio
+  \item[$\xi_i$] Ângulo de Diedro impróprio
+  \item[$ R_g $] Raio de giro
+  \item[$ \mat{G}_{mn} $] tensor de forma
+  \item[$ I_k $] Momento de inércia na direção $k$
+  \item[$ \delta $] Asfericidade
+\end{simbolos}
+% ---
+
+% ---
+% inserir o sumario
+% ---
+\pdfbookmark[0]{\contentsname}{toc}
+\tableofcontents*
+\cleardoublepage
+% ---
+
+
+
+% ----------------------------------------------------------
+% ELEMENTOS TEXTUAIS
+% ----------------------------------------------------------
+\textual
+
+\include{1introducao}
+
+\include{2objetivos}
+
+\include{3teorico}
+
+\include{4metodologia}
+
+\include{5resultados}
+
+\include{6conclusao}
+
+% ----------------------------------------------------------
+% ELEMENTOS PÓS-TEXTUAIS
+% ----------------------------------------------------------
+\postextual
+
+% ----------------------------------------------------------
+% Referências bibliográficas
+% ----------------------------------------------------------
+\makeatletter
+\renewcommand\@biblabel[1]{#1. }
+\makeatother
+
+%\bibliographystyle{biblatex-abnt}
+\bibliographystyle{abntex2-num}
+\bibliography{bibtex.bib}
+
+% ----------------------------------------------------------
+% Apêndices
+% ----------------------------------------------------------
+
+\begin{apendicesenv}
+
+% Imprime uma página indicando o início dos apêndices
+\partapendices
+
+% ----------------------------------------------------------
+\chapter{PAMAM utilizando o setup PME} \label{PAMAMap}
+
+\include{supPAMAM}
+
+\chapter{PPI utilizando o setup PME} \label{PPIap}
+
+\include{supPPI}
+
+% ----------------------------------------------------------
+
+
+\end{apendicesenv}
+% ---
+
+
+% ----------------------------------------------------------
+% Anexos
+% ----------------------------------------------------------
+
+%\begin{anexosenv}
+
+% Imprime uma página indicando o início dos anexos
+%\partanexos
+
+% ---
+%\chapter{Morbi ultrices rutrum lorem.}
+% ---
+
+
+%\end{anexosenv}
+
+%---------------------------------------------------------------------
+% INDICE REMISSIVO
+%---------------------------------------------------------------------
+\phantompart
+\printindex
+%---------------------------------------------------------------------
+
+\end{document}
+\grid
